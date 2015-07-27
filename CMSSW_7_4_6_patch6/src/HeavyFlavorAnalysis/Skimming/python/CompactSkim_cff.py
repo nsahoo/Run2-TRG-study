@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms
 
-def CompactSkim(process,inFileNames,outFileName,Global_Tag='auto:run2_mc',MC=True,Filter=True):
+def CompactSkim(process,inFileNames,outFileName,nEvents,Global_Tag='auto:run2_mc',MC=True,Filter=True):
 
    process.load('Configuration.StandardSequences.Services_cff')
    process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
@@ -11,11 +11,12 @@ def CompactSkim(process,inFileNames,outFileName,Global_Tag='auto:run2_mc',MC=Tru
    process.load('Configuration.StandardSequences.EndOfProcess_cff')
    process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
 
-   process.MessageLogger.cerr.FwkReport.reportEvery = 100
+   process.MessageLogger.cerr.FwkReport.reportEvery = 1000
    process.options = cms.untracked.PSet( wantSummary = cms.untracked.bool(True) )
    process.options.allowUnscheduled = cms.untracked.bool(True)
    process.source = cms.Source('PoolSource', fileNames = cms.untracked.vstring(inFileNames))
-   process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+#   process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+   process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(nEvents) )
 
    from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
    process.GlobalTag = GlobalTag(process.GlobalTag, Global_Tag, '')
