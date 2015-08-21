@@ -1,14 +1,15 @@
 import FWCore.ParameterSet.Config as cms
 
-process = cms.Process("testHLT")
+process = cms.Process("demo")
 
 process.load('Configuration.StandardSequences.Services_cff')
-process.load('Configuration.EventContent.EventContent_cff')
+#process.load('Configuration.EventContent.EventContent_cff')
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
-process.load("Configuration.StandardSequences.MagneticField_cff")
-process.load("Configuration.StandardSequences.Geometry_cff")
-process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
+#process.load("Configuration.StandardSequences.MagneticField_cff")
+#process.load("Configuration.StandardSequences.Geometry_cff")
+#process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 process.GlobalTag.globaltag = cms.string('MCRUN2_74_V7')
 
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(100) )
